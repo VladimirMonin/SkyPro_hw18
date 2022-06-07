@@ -1,3 +1,5 @@
+from sqlalchemy.orm import relationship
+
 from app.database import db
 from marshmallow import Schema, fields
 
@@ -10,8 +12,11 @@ class Movies(db.Model):
     trailer = db.Column(db.String)
     year = db.Column(db.Integer)
     rating = db.Column(db.Integer)
-    genre_id = db.Column(db.Integer)
-    director_id = db.Column(db.Integer)
+    genre_id = db.Column(db.Integer, db.ForeignKey('genres.id'))
+    director_id = db.Column(db.Integer, db.ForeignKey('directors.id'))
+
+    genres = relationship('Genres')
+    directors = relationship('Directors')
 
 
 class MoviesSchema(Schema):

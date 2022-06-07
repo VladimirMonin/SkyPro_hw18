@@ -1,6 +1,4 @@
-
 from app.dao.models.movies import Movies, MoviesSchema
-
 
 
 class MoviesDAO:
