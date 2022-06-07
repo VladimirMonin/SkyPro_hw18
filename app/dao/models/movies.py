@@ -5,7 +5,7 @@ from marshmallow import Schema, fields
 
 
 class Movies(db.Model):
-    __tablename__ = 'movie'
+    __tablename__ = 'movies'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     description = db.Column(db.String)
