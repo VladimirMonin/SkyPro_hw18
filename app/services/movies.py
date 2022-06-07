@@ -33,7 +33,7 @@ class MoviesService:
 
     def update_partial(self, data):
         mid = data.get('id')
-        movie = self.get_one(mid)
+        movie = self.get_one_raw(mid)
 
         if 'title' in data:
             movie.title = data.get('title')

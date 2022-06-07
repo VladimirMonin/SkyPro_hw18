@@ -31,6 +31,12 @@ class Movies(Resource):
         movies_service.update(data)
         return '', 204
 
+    def patch(self, mid: int):
+        data = request.json
+        data['id'] = mid
+        movies_service.update_partial(data)
+        return '', 204
+
     def delete(self, mid: int):
         movies_service.delete(mid)
         return '', 204
