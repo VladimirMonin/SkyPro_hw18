@@ -3,6 +3,7 @@ from flask_restx import Api
 
 from app.config import Config
 from app.database import db
+from app.views.movies import movies_ns
 
 
 def create_app(config: Config) -> Flask:
@@ -16,7 +17,8 @@ def create_app(config: Config) -> Flask:
 def configure_app(application: Flask):
     db.init_app(application)
     api = Api(app)
-    # api.add_namespace(cat_ns) # импорт из from app.views.cats import cat_ns
+    api.add_namespace(movies_ns)  # импорт из from app.views.cats import cat_ns
+
 
 if __name__ == '__main__':
     app_config = Config()  # Создаем объект кофигурации Фласк from app.config import Config
