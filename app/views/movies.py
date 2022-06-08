@@ -8,13 +8,27 @@ movies_ns = Namespace('movies')
 @movies_ns.route('/')
 class Movies(Resource):
     def get(self) -> [dict]:
-        return movies_service.get_all(), 200
+        director_id = request.values.get('director_id')
+        genre_id = request.values.get('genre_id')
+        year = request.values.get('year')
+
+        if director_id:
+            movies = movies_service.get_all_by_director(director_id)
+        elif genre_id:
+            movies = movies_service.get_all_by_genre(genre_id)
+        elif year:
+            movies = movies_service.get_all_by_year(year)
+
+        else:
+            movies = movies_service.get_all()
+
+        return movies, 200
 
     def post(self):
         data = request.get_json()
         movies_id = data['id']  # Получаем ID из запроса (которого там может и не быть, т.к. автоинкремент работает!)
         movies_service.create(data)   # Создаем новую запись в БД
-        #TODO Сделать по красоте - чтобы POST Работал без передачи IP с запросом
+        #TODO Сделать по красоте - чтобы POST Работал без передачи ID с запросом
         response = jsonify()  # Делаем пункт из ДЗ \\ Заголовок Location есть в POST на создание сущности.
         response.status_code = 201  # Код ответа
         response.headers['location'] = f'movies/{movies_id}'  # Адрес для "перехода" после добавления

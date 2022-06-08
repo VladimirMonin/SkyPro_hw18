@@ -8,6 +8,15 @@ class MoviesService:
     def get_all(self):
         return self.movies_dao.get_all()
 
+    def get_all_by_director(self, director_id):
+        return self.movies_dao.get_all_by_director(director_id)
+
+    def get_all_by_genre(self, genre_id):
+        return self.movies_dao.get_all_by_genre(genre_id)
+
+    def get_all_by_year(self, year):
+        return self.movies_dao.get_all_by_year(year)
+
     def get_one(self, mid):
         return self.movies_dao.get_one(mid)
 

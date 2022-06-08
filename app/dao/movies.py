@@ -10,6 +10,21 @@ class MoviesDAO:
         result = MoviesSchema(many=True).dump(movies)
         return result, 200
 
+    def get_all_by_director(self, director_id):
+        movies = Movies.query.filter(Movies.director_id == director_id).all()
+        result = MoviesSchema(many=True).dump(movies)
+        return result, 200
+
+    def get_all_by_genre(self, genre_id):
+        movies = Movies.query.filter(Movies.genre_id == genre_id).all()
+        result = MoviesSchema(many=True).dump(movies)
+        return result, 200
+
+    def get_all_by_year(self, year):
+        movies = Movies.query.filter(Movies.year == year).all()
+        result = MoviesSchema(many=True).dump(movies)
+        return result, 200
+
     def get_one(self, mid):
         movie = Movies.query.get(mid)
         result = MoviesSchema().dump(movie)
